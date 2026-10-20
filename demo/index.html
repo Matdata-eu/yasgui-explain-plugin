@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!--
+  YASGUI Explain Plugin - demo
+
+  A full Yasgui with the Explain plugin registered. Run a query against a
+  QLever, GraphDB, Stardog, Blazegraph or Neptune endpoint to see its
+  execution plan, or load one of the sample plans to try the view without
+  an endpoint. The algebra works for any query.
+  Run locally with: npm run dev
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YASGUI Explain Plugin Demo</title>
+  </head>
+  <body>
+    <header class="demo-header">
+      <h1>YASGUI Explain Plugin</h1>
+      <p>
+        See how an endpoint executes your query. Run a query on a QLever endpoint (the default tab
+        uses the QLever Olympics dataset), then open the <strong>Explain</strong> tab: the plan shows
+        each operation with its rows and time, and the algebra shows the query as the SPARQL
+        specification translates it. Or load a sample plan without an endpoint.
+      </p>
+      <div class="demo-controls" id="samples"></div>
+    </header>
+    <div id="yasgui"></div>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

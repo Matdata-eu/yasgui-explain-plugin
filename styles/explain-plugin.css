@@ -1,0 +1,326 @@
+.yasgui-plan-plugin {
+  color-scheme: light;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: var(--explain-text);
+  background: var(--explain-background);
+  font-size: 13px;
+}
+
+[data-theme='dark'] .yasgui-plan-plugin {
+  color-scheme: dark;
+}
+
+/* Own toolbar, used when the host has no toolbar slot */
+.explain-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--explain-border);
+}
+
+.explain-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.explain-field > span {
+  color: var(--explain-text-muted);
+}
+
+.explain-select,
+.explain-button {
+  min-height: 26px;
+  padding: 2px 8px;
+  border: 1px solid var(--explain-border);
+  border-radius: 4px;
+  background: var(--explain-background);
+  color: var(--explain-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.explain-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.explain-button:hover:not(:disabled),
+.explain-select:hover:not(:disabled) {
+  background: var(--explain-control-hover);
+}
+
+.explain-button:disabled,
+.explain-select:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Sections */
+.explain-section {
+  border-bottom: 1px solid var(--explain-border);
+}
+
+.explain-section:last-child {
+  border-bottom: 0;
+}
+
+.explain-section-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  padding: 6px 8px;
+  background: var(--explain-surface);
+}
+
+.explain-section-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 4px 2px 0;
+  border: 0;
+  background: none;
+  color: var(--explain-text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.explain-section-toggle .explain-icon {
+  transition: transform 0.15s;
+}
+
+.explain-section--collapsed .explain-section-toggle .explain-icon {
+  transform: rotate(-90deg);
+}
+
+.explain-section--collapsed .explain-section-body {
+  display: none;
+}
+
+.explain-section-status {
+  color: var(--explain-text-muted);
+}
+
+.explain-section-status--error {
+  color: var(--explain-error);
+}
+
+.explain-section-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.explain-section-body {
+  overflow: auto;
+}
+
+.explain-message {
+  padding: 12px 10px;
+  color: var(--explain-text-muted);
+}
+
+.explain-message--error {
+  color: var(--explain-error);
+  white-space: pre-wrap;
+  font-family: var(--explain-mono);
+  font-size: 12px;
+}
+
+.explain-message--info {
+  color: var(--explain-text);
+}
+
+.explain-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  padding: 8px 10px 4px;
+  color: var(--explain-text-muted);
+}
+
+/* Trees */
+.explain-tree {
+  padding: 6px 4px 8px;
+  font-family: var(--explain-mono);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.explain-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 2px 6px 2px calc(4px + var(--explain-depth, 0) * 18px);
+  border-radius: 4px;
+}
+
+.explain-row:hover {
+  background: var(--explain-control-hover);
+}
+
+.explain-toggle {
+  flex: 0 0 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: none;
+  color: var(--explain-text-muted);
+  cursor: pointer;
+}
+
+.explain-toggle:hover {
+  color: var(--explain-text);
+}
+
+.explain-toggle--leaf {
+  visibility: hidden;
+  cursor: default;
+}
+
+.explain-node--collapsed > .explain-row .explain-toggle .explain-icon {
+  transform: rotate(-90deg);
+}
+
+.explain-node--collapsed > .explain-children {
+  display: none;
+}
+
+.explain-row-main {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.explain-label {
+  word-break: break-word;
+}
+
+.explain-operator {
+  font-weight: 600;
+  color: var(--explain-primary);
+}
+
+.explain-args {
+  margin-left: 8px;
+}
+
+.explain-meta {
+  display: flex;
+  flex-direction: column;
+  color: var(--explain-text-muted);
+}
+
+.explain-meta--code {
+  color: var(--explain-text);
+}
+
+.explain-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 0 6px;
+  border-radius: 8px;
+  background: var(--explain-surface);
+  border: 1px solid var(--explain-border);
+  color: var(--explain-text-muted);
+  font-size: 11px;
+  font-family: inherit;
+  vertical-align: 1px;
+}
+
+.explain-node--cached > .explain-row {
+  opacity: 0.7;
+}
+
+.explain-node--inactive > .explain-row {
+  opacity: 0.55;
+}
+
+/* Plan statistics: rows, time, bar */
+.explain-stats {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: 90px 70px 120px;
+  align-items: center;
+  gap: 8px;
+  margin-left: 12px;
+  text-align: right;
+  color: var(--explain-text-muted);
+  white-space: nowrap;
+}
+
+.explain-plan--no-times .explain-stats {
+  grid-template-columns: 90px;
+}
+
+.explain-plan--no-times .explain-time,
+.explain-plan--no-times .explain-bar {
+  display: none;
+}
+
+.explain-bar {
+  display: block;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--explain-surface);
+  overflow: hidden;
+}
+
+.explain-bar-fill {
+  display: block;
+  height: 100%;
+  background: var(--explain-bar);
+}
+
+.explain-node--slowest > .explain-row .explain-bar-fill {
+  background: var(--explain-bar-slow);
+}
+
+.explain-node--slowest > .explain-row .explain-time {
+  color: var(--explain-bar-slow);
+  font-weight: 600;
+}
+
+@media (max-width: 700px) {
+  .explain-stats {
+    grid-template-columns: 70px 60px;
+  }
+
+  .explain-bar {
+    display: none;
+  }
+}
+
+/* Text plans */
+.explain-text {
+  margin: 0;
+  padding: 10px;
+  font-family: var(--explain-mono);
+  font-size: 12px;
+  line-height: 1.45;
+  white-space: pre;
+  color: var(--explain-text);
+}
+
+/* HTML plans (Blazegraph) */
+.explain-frame {
+  display: block;
+  width: 100%;
+  min-height: 480px;
+  height: 70vh;
+  border: 0;
+  background: #ffffff;
+}
