@@ -308,8 +308,16 @@ export class ExplainPlugin {
       if (controller.signal.aborted) return;
       const { body, contentType, status } = await readResponse(response);
       if (status !== undefined && status >= 400) {
+        const where = request.endpoint ? ` from ${request.endpoint}` : '';
+        const hint =
+          status === 404 && request.endpoint
+            ? ' The server does not expose this explain URL; a proxy in front of the endpoint may only forward queries.'
+            : '';
         throw new Error(
-          `The endpoint answered with HTTP ${status}${body ? `: ${body.slice(0, 500)}` : ''}`
+          `HTTP ${status}${where}${body ? `: ${body.slice(0, 500)}` : ''}.${hint}`.replace(
+            '..',
+            '.'
+          )
         );
       }
       const plan = engine.parse(body, contentType);
