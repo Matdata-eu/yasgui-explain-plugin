@@ -54,7 +54,7 @@
   "devDependencies": {
     "@matdata/yasgui": "^6.8.0",
     "@types/jest": "^30.0.0",
-    "@types/node": "^20.19.43",
+    "@types/node": "^26.6.5",
     "cssnano": "^7.1.9",
     "esbuild": "^0.28.2",
     "jest": "^30.5.2",
