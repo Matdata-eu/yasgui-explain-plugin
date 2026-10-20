@@ -84,7 +84,7 @@ npm run build        # dist/
 npm run build:demo   # demo/dist, published to GitHub Pages
 ```
 
-The demo opens on a QLever endpoint; the sample buttons show recorded plans without an endpoint (`?sample=qlever|graphdb|stardog`).
+The demo opens on a QLever endpoint, with buttons for public QLever, GraphDB, Blazegraph and Stardog endpoints; the sample buttons show recorded plans without an endpoint (`?sample=qlever|graphdb|stardog`).
 
 ## License
 

@@ -12,12 +12,15 @@ describe('detectEngine', () => {
     expect(detectEngine('https://graphdb.example.org/repositories/x')).toBe('graphdb');
     expect(detectEngine('http://localhost:9999/blazegraph/namespace/kb/sparql')).toBe('blazegraph');
     expect(detectEngine('http://localhost:9999/bigdata/sparql')).toBe('blazegraph');
+    expect(detectEngine('https://query.wikidata.org/sparql')).toBe('blazegraph');
+    expect(detectEngine('https://lindas.admin.ch/query')).toBe('stardog');
+    expect(detectEngine('https://graph.data.era.europa.eu/repositories/rinf-plus')).toBe('graphdb');
+    expect(detectEngine('https://qlever.dev/api/wikidata')).toBe('qlever');
     expect(detectEngine('http://localhost:5820/mydb/query')).toBe('stardog');
     expect(detectEngine('https://stardog.example.org/mydb/query')).toBe('stardog');
     expect(
       detectEngine('https://db-1.cluster-abc.eu-west-1.neptune.amazonaws.com:8182/sparql')
     ).toBe('neptune');
-    expect(detectEngine('https://query.wikidata.org/sparql')).toBeUndefined();
     expect(detectEngine('https://dbpedia.org/sparql')).toBeUndefined();
     expect(detectEngine(undefined)).toBeUndefined();
     expect(detectEngine('not a url')).toBeUndefined();

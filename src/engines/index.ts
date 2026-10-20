@@ -51,6 +51,9 @@ export function detectEngine(
   if (host.includes('neptune.amazonaws.com') || host.endsWith('.neptune.amazonaws.com'))
     return 'neptune';
   if (/\/(bigdata|blazegraph)(\/|$)/.test(path)) return 'blazegraph';
+  // Well-known public endpoints whose URL does not name the engine
+  if (host === 'query.wikidata.org') return 'blazegraph';
+  if (host === 'lindas.admin.ch' || host === 'ld.admin.ch') return 'stardog';
   if (host.includes('graphdb') || path.includes('graphdb')) return 'graphdb';
   if (/\/repositories\/[^/]+\/?$/.test(path)) return 'graphdb';
   if (host.includes('stardog') || path.includes('stardog') || url.port === '5820') return 'stardog';

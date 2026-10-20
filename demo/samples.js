@@ -90,7 +90,8 @@ const qleverResponse = {
                       details: { original_operation_time: 11, original_total_time: 18 },
                       children: [
                         {
-                          description: 'INDEX SCAN ?medal olympics:medal <http://wallscope.co.uk/resource/olympics/medal/Gold>',
+                          description:
+                            'INDEX SCAN ?medal olympics:medal <http://wallscope.co.uk/resource/olympics/medal/Gold>',
                           operation_time: 0,
                           total_time: 3,
                           result_rows: 13295,

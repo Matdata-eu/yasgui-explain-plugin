@@ -4,6 +4,7 @@ import ExplainPlugin from '@matdata/yasgui-explain-plugin';
 import '../styles/index.css';
 import './style.css';
 import { samples } from './samples.js';
+import { endpoints } from './endpoints.js';
 
 // Register the plugin to Yasr (MatGUI's own build already includes it)
 Yasgui.Yasr.registerPlugin('Explain', ExplainPlugin);
@@ -58,6 +59,24 @@ function loadSample(name) {
 function liveMode() {
   const plugin = yasgui.getTab().getYasr().plugins.Explain;
   plugin.setOptions({ engine: undefined, requestPlan: undefined });
+}
+
+/** Point the current tab at a public endpoint, with a query that suits it */
+function useEndpoint(endpoint) {
+  liveMode();
+  const tab = yasgui.getTab();
+  tab.setEndpoint(endpoint.url);
+  tab.getYasqe().setValue(endpoint.query);
+}
+
+const endpointButtons = document.getElementById('endpoints');
+for (const endpoint of endpoints) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = endpoint.label;
+  button.title = endpoint.url;
+  button.addEventListener('click', () => useEndpoint(endpoint));
+  endpointButtons.appendChild(button);
 }
 
 const buttons = document.getElementById('samples');
