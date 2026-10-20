@@ -7,7 +7,7 @@
 import type { EngineChoice } from './types';
 import { isEngineChoice } from './engines';
 
-const STORAGE_KEY = 'yasgui-plan-plugin:engines';
+const STORAGE_KEY = 'yasgui-explain-plugin:engines';
 
 function readAll(): Record<string, EngineChoice> {
   try {

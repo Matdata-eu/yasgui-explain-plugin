@@ -1,6 +1,6 @@
 import '@matdata/yasgui/build/yasgui.min.css';
 import Yasgui from '@matdata/yasgui';
-import ExplainPlugin from '@matdata/yasgui-plan-plugin';
+import ExplainPlugin from '@matdata/yasgui-explain-plugin';
 import '../styles/index.css';
 import './style.css';
 import { samples } from './samples.js';

@@ -34,5 +34,5 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            dist/yasgui-plan-plugin.min.js
-            dist/yasgui-plan-plugin.min.css
+            dist/yasgui-explain-plugin.min.js
+            dist/yasgui-explain-plugin.min.css

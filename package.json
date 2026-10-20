@@ -1,11 +1,11 @@
 {
-  "name": "@matdata/yasgui-plan-plugin",
+  "name": "@matdata/yasgui-explain-plugin",
   "private": false,
   "version": "0.1.0",
   "description": "Explain view for YASGUI and MatGUI: the SPARQL algebra of a query, and the execution plan with timings from QLever, GraphDB, Stardog, Blazegraph and Neptune",
-  "main": "dist/yasgui-plan-plugin.cjs.js",
-  "module": "dist/yasgui-plan-plugin.esm.js",
-  "unpkg": "dist/yasgui-plan-plugin.min.js",
+  "main": "dist/yasgui-explain-plugin.cjs.js",
+  "module": "dist/yasgui-explain-plugin.esm.js",
+  "unpkg": "dist/yasgui-explain-plugin.min.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist",
@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build:demo": "vite build --base=/yasgui-plan-plugin/",
+    "build:demo": "vite build --base=/yasgui-explain-plugin/",
     "build": "node esbuild.config.js",
     "typecheck": "tsc --noEmit",
     "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Matdata-eu/yasgui-plan-plugin.git"
+    "url": "git+https://github.com/Matdata-eu/yasgui-explain-plugin.git"
   },
   "keywords": [
     "yasgui",
@@ -41,9 +41,9 @@
   "author": "Matdata",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/Matdata-eu/yasgui-plan-plugin/issues"
+    "url": "https://github.com/Matdata-eu/yasgui-explain-plugin/issues"
   },
-  "homepage": "https://github.com/Matdata-eu/yasgui-plan-plugin#readme",
+  "homepage": "https://github.com/Matdata-eu/yasgui-explain-plugin#readme",
   "publishConfig": {
     "access": "public"
   },

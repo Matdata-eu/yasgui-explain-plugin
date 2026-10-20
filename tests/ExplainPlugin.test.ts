@@ -65,7 +65,7 @@ describe('ExplainPlugin', () => {
       acceptHeader: 'application/qlever-results+json',
     });
 
-    const root = yasr.resultsEl.querySelector('.yasgui-plan-plugin')!;
+    const root = yasr.resultsEl.querySelector('.yasgui-explain-plugin')!;
     expect(root).not.toBeNull();
     const sections = root.querySelectorAll('.explain-section');
     expect(sections).toHaveLength(2);
@@ -117,7 +117,7 @@ describe('ExplainPlugin', () => {
     expect(executeQuery).toHaveBeenCalledTimes(1);
     expect(executeQuery.mock.calls[0][0]).toContain('FROM <http://www.ontotext.com/explain>');
     expect(yasr.resultsEl.querySelector('.explain-text')!.textContent).toBe('plan text');
-    expect(JSON.parse(window.localStorage.getItem('yasgui-plan-plugin:engines')!)).toEqual({
+    expect(JSON.parse(window.localStorage.getItem('yasgui-explain-plugin:engines')!)).toEqual({
       'https://dbpedia.org/sparql': 'graphdb',
     });
 

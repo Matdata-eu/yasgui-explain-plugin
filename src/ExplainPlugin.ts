@@ -54,7 +54,7 @@ interface PlanState {
 export class ExplainPlugin {
   priority = 1;
   label = 'Explain';
-  helpReference = 'https://github.com/Matdata-eu/yasgui-plan-plugin#readme';
+  helpReference = 'https://github.com/Matdata-eu/yasgui-explain-plugin#readme';
 
   private yasr: Yasr;
   private options: ExplainPluginOptions;
@@ -158,7 +158,7 @@ export class ExplainPlugin {
     this.readQueryAndEndpoint(options);
 
     const wrapper = document.createElement('div');
-    wrapper.className = 'yasgui-plan-plugin';
+    wrapper.className = 'yasgui-explain-plugin';
     this.container = wrapper;
 
     const resolved = this.resolveEngine(options);

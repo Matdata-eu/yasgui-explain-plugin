@@ -11,7 +11,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@matdata/yasgui-plan-plugin': resolve(__dirname, 'src/index.ts'),
+      '@matdata/yasgui-explain-plugin': resolve(__dirname, 'src/index.ts'),
     },
   },
   build: {

@@ -16,7 +16,7 @@ export function getHostToolbar(yasr: Yasr | null | undefined): HTMLDivElement | 
     const slot = yasr.getPluginToolbar();
     return slot instanceof HTMLElement ? (slot as HTMLDivElement) : null;
   } catch (error) {
-    console.warn('yasgui-plan-plugin: could not get the plugin toolbar', error);
+    console.warn('yasgui-explain-plugin: could not get the plugin toolbar', error);
     return null;
   }
 }
@@ -45,7 +45,7 @@ export function readQueryLink(yasr: Yasr | null | undefined): {
   try {
     link = getLink();
   } catch (error) {
-    console.warn('yasgui-plan-plugin: could not read the query link', error);
+    console.warn('yasgui-explain-plugin: could not read the query link', error);
     return {};
   }
   if (!link) return {};

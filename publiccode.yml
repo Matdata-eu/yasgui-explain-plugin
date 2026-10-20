@@ -1,7 +1,7 @@
 publiccodeYmlVersion: '0'
 name: YASGUI Explain Plugin
-url: https://github.com/Matdata-eu/yasgui-plan-plugin
-landingURL: https://matdata-eu.github.io/yasgui-plan-plugin/
+url: https://github.com/Matdata-eu/yasgui-explain-plugin
+landingURL: https://matdata-eu.github.io/yasgui-explain-plugin/
 softwareVersion: 1.0.0
 releaseDate: '2026-10-20'
 platforms:
@@ -28,7 +28,7 @@ description:
       This plugin adds an Explain view to the results of a SPARQL query. It shows the execution plan of the triple store, asked from the endpoint after the query ran: the operations the engine executed, with the rows and the time of each, for QLever, GraphDB, Stardog, Blazegraph and Amazon Neptune. For any endpoint it also shows the SPARQL algebra of the query, as a tree and as the s-expression used by the SPARQL specification, computed in the browser.
 
       It helps to understand why a query is slow, which join or scan takes the time, and how the engine reads the query. It works in YASGUI and in MatGUI, where it is included by default.
-    documentation: https://github.com/Matdata-eu/yasgui-plan-plugin#readme
+    documentation: https://github.com/Matdata-eu/yasgui-explain-plugin#readme
     features:
     - Execution plan with time and rows per operation (QLever)
     - Execution plans of GraphDB, Stardog, Blazegraph and Neptune

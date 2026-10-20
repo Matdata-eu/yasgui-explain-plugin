@@ -1,4 +1,4 @@
-.yasgui-plan-plugin {
+.yasgui-explain-plugin {
   color-scheme: light;
   display: flex;
   flex-direction: column;
@@ -8,7 +8,7 @@
   font-size: 13px;
 }
 
-[data-theme='dark'] .yasgui-plan-plugin {
+[data-theme='dark'] .yasgui-explain-plugin {
   color-scheme: dark;
 }
 
