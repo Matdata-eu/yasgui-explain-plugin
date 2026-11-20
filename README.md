@@ -6,7 +6,7 @@
 
 An **Explain** result view for [YASGUI](https://github.com/TriplyDB/Yasgui) and [MatGUI](https://github.com/Matdata-eu/MatGUI) that shows how a SPARQL query is executed:
 
-- **Execution plan**: the operations the triple store ran for your query, with the rows and the time of each, asked from the endpoint after the query completed. Supported engines: QLever, GraphDB, Stardog, Blazegraph and Amazon Neptune.
+- **Execution plan**: the operations the triple store ran for your query, with the rows and the time of each, asked from the endpoint after the query completed. Supported engines: QLever, GraphDB, Stardog, Blazegraph, Amazon Neptune and TripleTrail.
 - **Algebra**: the query translated to SPARQL algebra (section 18 of the SPARQL specification), computed in the browser for any endpoint, as a collapsible tree and as the s-expression used by ARQ and the specification.
 
 **[Live demo](https://matdata-eu.github.io/yasgui-explain-plugin/)**
@@ -53,10 +53,11 @@ Run a query, then open the **Explain** tab. The algebra is there at once. The pl
 | Stardog | `/{db}/explain` with `profile=true` | the profiled plan as text: rows, wall time and memory per operator |
 | Blazegraph | the query with `explain=details` | Blazegraph's explain page, in a sandboxed frame |
 | Neptune | the query with `explain=details` | Neptune's explain table as text |
+| TripleTrail | `/{ds}/explain` (beside `/{ds}/sparql` or `/{ds}/query`), recognised from a `Server` header naming TripleTrail | the operation tree with the time and rows of each step, the row count, planning time and spatial index decisions |
 
 Virtuoso, Jena Fuseki, Oxigraph, RDF4J and Comunica publish no plan over the SPARQL protocol: the view then shows the algebra only.
 
-Only MatGUI's YASR runs the plan request with the authentication and request settings of the tab. In other hosts the plugin sends the request itself, without them. Stardog, Blazegraph and Neptune need extra request parameters, which MatGUI passes on from version 6.9 (`yasr.hostApi.queryRequest`); older hosts send those requests directly too.
+Only MatGUI's YASR runs the plan request with the authentication and request settings of the tab. In other hosts the plugin sends the request itself, without them. Stardog, Blazegraph, Neptune and TripleTrail need extra request parameters, which MatGUI passes on from version 6.9 (`yasr.hostApi.queryRequest`); older hosts send those requests directly too.
 
 ## Options
 
@@ -64,7 +65,7 @@ Options go in the plugin constructor, or in `yasr.config.plugins.Explain.dynamic
 
 | Option | Default | Meaning |
 |---|---|---|
-| `engine` | detect | Force an engine (`qlever`, `graphdb`, `stardog`, `blazegraph`, `neptune`) or `none` for every endpoint |
+| `engine` | detect | Force an engine (`qlever`, `graphdb`, `stardog`, `blazegraph`, `neptune`, `tripletrail`) or `none` for every endpoint |
 | `engines` | all | The engines offered in the list, in order |
 | `autoFetch` | `true` | Fetch the plan when the view opens; with `false`, the Refresh button does |
 | `getQuery` | the host's query link | A function returning the query text |

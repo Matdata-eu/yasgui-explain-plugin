@@ -4,7 +4,7 @@
  * A YASR result view with two parts:
  * - the execution plan of the query, asked from the endpoint's engine with one
  *   background request after the query ran (QLever, GraphDB, Stardog,
- *   Blazegraph, Neptune), and
+ *   Blazegraph, Neptune, TripleTrail), and
  * - the SPARQL algebra of the query, computed in the browser for any endpoint.
  */
 
@@ -252,7 +252,7 @@ export class ExplainPlugin {
       planSection.body.appendChild(
         message(
           resolved.source === 'none'
-            ? 'No engine recognised for this endpoint. Pick it in the Engine list when it is QLever, GraphDB, Stardog, Blazegraph or Neptune; other engines publish no plan over the SPARQL protocol.'
+            ? 'No engine recognised for this endpoint. Pick it in the Engine list when it is QLever, GraphDB, Stardog, Blazegraph, Neptune or TripleTrail; other engines publish no plan over the SPARQL protocol.'
             : 'No plan is asked for this endpoint. Pick an engine in the Engine list to fetch one.'
         )
       );

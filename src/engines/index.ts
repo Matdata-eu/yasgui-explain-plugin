@@ -9,10 +9,25 @@ import { graphdb } from './graphdb';
 import { stardog } from './stardog';
 import { blazegraph } from './blazegraph';
 import { neptune } from './neptune';
+import { tripletrail } from './tripletrail';
 
-export const ENGINES: Record<EngineId, Engine> = { qlever, graphdb, stardog, blazegraph, neptune };
+export const ENGINES: Record<EngineId, Engine> = {
+  qlever,
+  graphdb,
+  stardog,
+  blazegraph,
+  neptune,
+  tripletrail,
+};
 
-export const ENGINE_IDS: EngineId[] = ['qlever', 'graphdb', 'stardog', 'blazegraph', 'neptune'];
+export const ENGINE_IDS: EngineId[] = [
+  'qlever',
+  'graphdb',
+  'stardog',
+  'blazegraph',
+  'neptune',
+  'tripletrail',
+];
 
 export function isEngineId(value: unknown): value is EngineId {
   return typeof value === 'string' && value in ENGINES;
@@ -36,6 +51,7 @@ export function detectEngine(
   if (server.includes('graphdb')) return 'graphdb';
   if (server.includes('stardog')) return 'stardog';
   if (server.includes('blazegraph') || server.includes('bigdata')) return 'blazegraph';
+  if (server.includes('tripletrail')) return 'tripletrail';
 
   if (!endpoint) return undefined;
   let url: URL | undefined;

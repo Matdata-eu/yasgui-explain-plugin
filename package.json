@@ -2,7 +2,7 @@
   "name": "@matdata/yasgui-explain-plugin",
   "private": false,
   "version": "0.1.0",
-  "description": "Explain view for YASGUI and MatGUI: the SPARQL algebra of a query, and the execution plan with timings from QLever, GraphDB, Stardog, Blazegraph and Neptune",
+  "description": "Explain view for YASGUI and MatGUI: the SPARQL algebra of a query, and the execution plan with timings from QLever, GraphDB, Stardog, Blazegraph, Neptune and TripleTrail",
   "main": "dist/yasgui-explain-plugin.cjs.js",
   "module": "dist/yasgui-explain-plugin.esm.js",
   "unpkg": "dist/yasgui-explain-plugin.min.js",
@@ -36,7 +36,8 @@
     "qlever",
     "graphdb",
     "stardog",
-    "blazegraph"
+    "blazegraph",
+    "tripletrail"
   ],
   "author": "Matdata",
   "license": "Apache-2.0",
