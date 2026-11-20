@@ -194,6 +194,72 @@ Slice(offset=0, limit=10) [#10], results: 10, wall time: 0 ms (0.0%), memory: 0 
             +─ Scan[PSOC](?s, :label, ?label) [#5.0K], results: 4927, wall time: 1 ms (1.2%), memory: 0 B
             \`─ Scan[PSOC](?s, :price, ?price) [#5.0K], results: 4927, wall time: 1 ms (1.2%), memory: 0 B`;
 
+const tripletrailQuery = `PREFIX : <http://example.org/>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
+
+SELECT ?station ?name WHERE {
+  ?station a :Station ;
+           :name ?name ;
+           geo:hasGeometry/geo:asWKT ?wkt .
+  FILTER(geof:sfWithin(?wkt, "POLYGON((4.2 50.7, 4.6 50.7, 4.6 51.0, 4.2 51.0, 4.2 50.7))"^^geo:wktLiteral))
+}
+ORDER BY ?name`;
+
+const tripletrailResponse = {
+  rows: 42,
+  spatial: {
+    filters: 1,
+    joins: 0,
+    candidates: 57,
+    lookup_ms: 0.38,
+    decisions: ['sfWithin on ?wkt answered from the spatial index (bounding box of the polygon)'],
+  },
+  plan: {
+    'planning duration in seconds': 0.00052,
+    plan: {
+      name: 'Project(?station, ?name)',
+      'number of results': 42,
+      'duration in seconds': 0.00021,
+      children: [
+        {
+          name: 'OrderBy(?name)',
+          'number of results': 42,
+          'duration in seconds': 0.00034,
+          children: [
+            {
+              name: 'Filter(sfWithin(?wkt, POLYGON))',
+              'number of results': 42,
+              'duration in seconds': 0.00112,
+              children: [
+                {
+                  name: 'Join(?station)',
+                  'number of results': 57,
+                  'duration in seconds': 0.00087,
+                  children: [
+                    {
+                      name: 'QuadPattern(?station geo:hasGeometry/geo:asWKT ?wkt)',
+                      'number of results': 57,
+                      'duration in seconds': 0.00041,
+                      children: [],
+                    },
+                    {
+                      name: 'QuadPattern(?station :name ?name)',
+                      'number of results': 1840,
+                      'duration in seconds': 0.00163,
+                      children: [],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  },
+};
+
 export const samples = {
   qlever: {
     label: 'QLever plan',
@@ -215,5 +281,12 @@ export const samples = {
     query: stardogQuery,
     contentType: 'text/plain',
     body: stardogPlan,
+  },
+  tripletrail: {
+    label: 'TripleTrail plan',
+    engine: 'tripletrail',
+    query: tripletrailQuery,
+    contentType: 'application/json',
+    body: JSON.stringify(tripletrailResponse),
   },
 };
