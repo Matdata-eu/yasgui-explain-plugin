@@ -50,7 +50,7 @@ export interface Yasr {
 }
 
 /** The identifiers of the engines the plugin can ask for a plan */
-export type EngineId = 'qlever' | 'graphdb' | 'stardog' | 'blazegraph' | 'neptune';
+export type EngineId = 'qlever' | 'graphdb' | 'stardog' | 'blazegraph' | 'neptune' | 'tripletrail';
 
 /** The engine setting of an endpoint: detect it, one of the engines, or no plan at all */
 export type EngineChoice = 'auto' | EngineId | 'none';

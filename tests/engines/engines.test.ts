@@ -4,6 +4,11 @@ import { addExplainGraph, findWhereOffset, parseGraphdbResponse } from '../../sr
 import { explainUrl, parseStardogResponse } from '../../src/engines/stardog';
 import { parseBlazegraphResponse } from '../../src/engines/blazegraph';
 import { parseNeptuneResponse } from '../../src/engines/neptune';
+import {
+  explainUrl as tripletrailExplainUrl,
+  parseTripleTrailResponse,
+  tripletrail,
+} from '../../src/engines/tripletrail';
 
 describe('detectEngine', () => {
   it('recognises engines from the endpoint URL', () => {
@@ -28,6 +33,11 @@ describe('detectEngine', () => {
 
   it('prefers the Server header', () => {
     expect(detectEngine('https://dbpedia.org/sparql', 'QLever')).toBe('qlever');
+    expect(detectEngine('http://localhost:7878/ds/sparql', 'TripleTrail/0.1.0')).toBe(
+      'tripletrail'
+    );
+    // Without the header, a /ds/sparql endpoint names no engine
+    expect(detectEngine('http://localhost:7878/ds/sparql')).toBeUndefined();
   });
 });
 
@@ -234,5 +244,91 @@ describe('Blazegraph and Neptune', () => {
       'bad'
     );
     expect(ENGINES.neptune.buildRequest('q', 'e').extraArgs).toEqual({ explain: 'details' });
+  });
+});
+
+describe('TripleTrail', () => {
+  const response = {
+    rows: 1,
+    spatial: {
+      filters: 1,
+      joins: 0,
+      candidates: 12,
+      lookup_ms: 0.42,
+      decisions: ['bbox from the area'],
+    },
+    plan: {
+      'planning duration in seconds': 0.000415,
+      plan: {
+        name: 'Project(?a, ?b)',
+        'number of results': 1,
+        'duration in seconds': 0.00134,
+        children: [
+          {
+            name: 'Lateral',
+            'number of results': 1,
+            'duration in seconds': 0.00089,
+            children: [
+              {
+                name: 'QuadPattern(?a <http://e/p> ?b)',
+                'number of results': 2,
+                'duration in seconds': 0.00019,
+                children: [],
+              },
+            ],
+          },
+        ],
+      },
+    },
+  };
+
+  it('asks /explain beside the endpoint', () => {
+    expect(tripletrailExplainUrl('http://localhost:7878/ds/sparql')).toBe(
+      'http://localhost:7878/ds/explain'
+    );
+    expect(tripletrailExplainUrl('http://localhost:7878/ds/query/')).toBe(
+      'http://localhost:7878/ds/explain'
+    );
+    expect(tripletrailExplainUrl('https://h/$/workspaces/w1/sparql?x=1')).toBe(
+      'https://h/$/workspaces/w1/explain?x=1'
+    );
+    expect(tripletrail.buildRequest('SELECT * {}', 'http://h/ds/sparql')).toEqual({
+      query: 'SELECT * {}',
+      accept: 'application/json',
+      endpoint: 'http://h/ds/explain',
+    });
+  });
+
+  it('reads the plan as a tree with rows and times', () => {
+    const plan = parseTripleTrailResponse(JSON.stringify(response));
+    expect(plan.kind).toBe('tree');
+    if (plan.kind !== 'tree') return;
+    expect(plan.root.label).toBe('Project(?a, ?b)');
+    expect(plan.root.rows).toBe(1);
+    expect(plan.root.timeMs).toBeCloseTo(1.34);
+    expect(plan.root.children[0].children[0]).toMatchObject({
+      label: 'QuadPattern(?a <http://e/p> ?b)',
+      rows: 2,
+    });
+    expect(plan.summary).toEqual([
+      'Result size: 1 rows',
+      'Query planning: 0.41 ms',
+      'Spatial: 1 filters, 0 joins, 12 candidates, index lookup 0.4 ms',
+      'Spatial rewrite: bbox from the area',
+    ]);
+  });
+
+  it('says why a restricted caller gets no plan', () => {
+    const plan = parseTripleTrailResponse('{"rows":3,"restricted":true}');
+    expect(plan).toMatchObject({ kind: 'text' });
+    if (plan.kind === 'text') expect(plan.text).toContain('Result size: 3 rows');
+  });
+
+  it('refuses query results and other answers', () => {
+    expect(() => parseTripleTrailResponse('{"head":{},"results":{"bindings":[]}}')).toThrow(
+      /instead of a plan/
+    );
+    expect(() => parseTripleTrailResponse('<html>')).toThrow(/did not return JSON/);
+    expect(() => parseTripleTrailResponse(' ')).toThrow(/empty/);
   });
 });
