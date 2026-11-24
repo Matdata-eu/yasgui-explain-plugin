@@ -85,7 +85,7 @@ npm run build        # dist/
 npm run build:demo   # demo/dist, published to GitHub Pages
 ```
 
-The demo opens on a QLever endpoint, with buttons for public QLever, GraphDB, Blazegraph and Stardog endpoints; the sample buttons show recorded plans without an endpoint (`?sample=qlever|graphdb|stardog|tripletrail`).
+The demo is MatGUI (`@matdata/yasgui` 6.15.0) with the plugin from this repository. It opens on a QLever endpoint; the **Endpoint** picker switches to public QLever, GraphDB, Blazegraph and Stardog endpoints with a query that suits them, and the **Recorded plan** picker shows plans without an endpoint (`?sample=qlever|graphdb|stardog|tripletrail`).
 
 ## License
 

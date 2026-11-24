@@ -1,34 +1,54 @@
 <!DOCTYPE html>
 <!--
-  YASGUI Explain Plugin - demo
+  Explain plugin demo
 
-  A full Yasgui with the Explain plugin registered. Run a query against a
-  QLever, GraphDB, Stardog, Blazegraph, Neptune or TripleTrail endpoint to see its
-  execution plan, or load one of the sample plans to try the view without
-  an endpoint. The algebra works for any query.
-  Run locally with: npm run dev
+  MatGUI (@matdata/yasgui 6.15.0) with the Explain plugin from this
+  repository. The editor stays, because a live plan needs a query and an
+  endpoint: pick a public QLever, GraphDB, Blazegraph or Stardog endpoint and
+  press Run, then open the Explain view. Or pick a recorded plan, which needs
+  no endpoint. The algebra works for any query. The theme switch is MatGUI's
+  own, in its header.
+
+  Development: npm run dev
+  Deployed: npm run build:demo
 -->
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>YASGUI Explain Plugin Demo</title>
-  </head>
-  <body>
-    <header class="demo-header">
-      <h1>YASGUI Explain Plugin</h1>
-      <p>
-        See how an endpoint executes your query. Run a query on a QLever endpoint (the default tab
-        uses the QLever Olympics dataset), then open the <strong>Explain</strong> tab: the plan shows
-        each operation with its rows and time, and the algebra shows the query as the SPARQL
-        specification translates it. Or load a sample plan without an endpoint.
-      </p>
-      <p class="demo-label">Public endpoints, to run a query and fetch its plan live (then press Run):</p>
-      <div class="demo-controls" id="endpoints"></div>
-      <p class="demo-label">Recorded plans, without an endpoint:</p>
-      <div class="demo-controls" id="samples"></div>
-    </header>
-    <div id="yasgui"></div>
-    <script type="module" src="./main.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explain plugin demo</title>
+  <meta name="description" content="Demo of the MatGUI Explain view: query plans of QLever, GraphDB, Stardog, Blazegraph, Neptune and TripleTrail, and the SPARQL algebra.">
+
+  <!-- MatGUI, with the fonts it expects the page to load -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@matdata/yasgui@6.15.0/build/yasgui.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="./demo.css">
+</head>
+<body>
+  <header class="demo-bar">
+    <div class="demo-brand">
+      <h1><span>Explain</span> plugin</h1>
+      <p>How an endpoint runs your query: the engine's plan with rows and time per operation, and the query's SPARQL algebra.</p>
+    </div>
+    <div class="demo-actions">
+      <label class="demo-field">
+        Endpoint
+        <select id="endpoint" class="demo-select"></select>
+      </label>
+      <label class="demo-field">
+        Recorded plan
+        <select id="sample" class="demo-select"></select>
+      </label>
+      <a class="demo-link" href="https://github.com/Matdata-eu/yasgui-explain-plugin">Source</a>
+      <a class="demo-link" href="https://matgui.matdata.eu/">MatGUI</a>
+    </div>
+  </header>
+  <p class="demo-hint" id="hint"></p>
+  <main class="demo-pane demo-pane--app" id="yasgui" aria-label="MatGUI"></main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@matdata/yasgui@6.15.0/build/yasgui.min.js"></script>
+  <script type="module" src="./main.js"></script>
+</body>
 </html>
