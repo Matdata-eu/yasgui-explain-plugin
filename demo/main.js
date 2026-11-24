@@ -102,6 +102,8 @@ sampleSelect.addEventListener('change', () => {
 });
 
 hint.innerHTML = LIVE_HINT;
+// The picker shows the endpoint the tab starts on
+endpointSelect.value = yasgui.getTab().getEndpoint?.() || '';
 
 // ?sample=qlever opens the page on a recorded plan
 const requested = new URLSearchParams(window.location.search).get('sample');
